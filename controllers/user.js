@@ -28,9 +28,11 @@ module.exports = {
               tagArray.forEach(function(tag){
                 var criteria = {};
                 criteria.tags = {$regex: new RegExp(tag,"gi")};
-                models.Post.find(criteria).select('ownerUserId').exec(function(err,users){
-                  var userIds = _.pluck(users,'ownerUserId');
-                  models.User.find({id : {$in : userIds}}).exec(function(err,usersDoc){
+                models.Post.find(criteria).select('ownerUserId lastEditorUserId').exec(function(err,users){
+                  var postUserIds = _.pluck(users,'ownerUserId');
+                  var editUserIds = _.pluck(users,'lastEditorUserId');
+                  postUserIds.push.apply(postUserIds,editUserIds);
+                  models.User.find({id : {$in : postUserIds}}).exec(function(err,usersDoc){
                     list.push.apply(list,usersDoc);
                   });
                 })
