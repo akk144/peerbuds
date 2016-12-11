@@ -7,7 +7,6 @@
     "start": "node index.js"
   },
   "dependencies": {
-    "xml2json": "^0.10.0",
     "async": "^1.5.2",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.14.1",
@@ -18,10 +17,15 @@
     "express-domain-middleware": "^0.1.0",
     "express-session": "^1.13.0",
     "foundation-sites": "^6.2.0",
+    "hat": "0.0.3",
     "jwt-simple": "^0.4.0",
     "mongoose": "^4.0.6",
     "morgan": "^1.6.1",
-    "underscore": "^1.8.3"
+    "socket.io": "^1.4.6",
+    "socket.io-p2p-server": "^1.2.0",
+    "socket.io-redis": "^1.0.0",
+    "underscore": "^1.8.3",
+    "xml2json": "^0.10.0"
   },
   "author": "",
   "license": "ISC",
