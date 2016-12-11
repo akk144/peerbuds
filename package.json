@@ -1,0 +1,31 @@
+{
+  "name": "peerbuds",
+  "version": "1.0.0",
+  "description": "Q/A site",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "xml2json": "^0.10.0",
+    "async": "^1.5.2",
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.14.1",
+    "connect-mongodb-session": "^1.1.1",
+    "dotenv": "^2.0.0",
+    "ejs": "~0.8.5",
+    "express": "^4.13.3",
+    "express-domain-middleware": "^0.1.0",
+    "express-session": "^1.13.0",
+    "foundation-sites": "^6.2.0",
+    "jwt-simple": "^0.4.0",
+    "mongoose": "^4.0.6",
+    "morgan": "^1.6.1",
+    "underscore": "^1.8.3"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "^2.5.3"
+  }
+}

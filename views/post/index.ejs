@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <% include ../common/head %>
+  </head>
+  <body>
+    <nav class="navbar navbar-inverse">
+      <div class="container">
+        <% include ../common/nav_header %>
+      </div>
+    </nav>
+
+    <div class="container">
+      <h1>List of Posts</h1>
+      <div class="row">
+        <div class="form-group col-md-4">
+          <label for="search">Search By Title</label>
+          <input type="text" value="<%= searchTitle %>" name="searchByTitle" class="form-control" id="searchByTitle" placeholder = "Eg. Who is Famous"/>
+        </div>
+        <div class="form-group col-md-1">
+          <label></label>
+          <input type="button" id="search" class="btn btn-success" value="Search" />
+        </div>
+        <div class="form-group col-md-3">
+          <label>Filters :  Tags</label>
+          <select name="tag" class="form-control" id="tag">
+            <option value="" selected = "selected"><%= (tag) ?tag : '' %></option>
+            <% for(var i=0; i< tags.length; i++) {%>
+              <option value="<%=tags[i].tagName%>" <%= tags[i].tagName === tag ? 'selected="selected"' : ''%>><%= tags[i].tagName%></option>
+            <% }%>
+          </select>
+        </div>
+      </div>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>S.No</th>
+            <th>Title</th>
+            <th>Body</th>
+            <th>Score</th>
+            <th>ViewCount</th>
+            <th>Tags</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for(var i=0; i< posts.length; i++) {%>
+            <tr>
+              <td><%= offset-50 + i+1 %></td>
+              <td><%= (posts[i].title) ? posts[i].title : ''  %></td>
+              <td><pre><code><%= posts[i].body %></code></pre></td>
+              <td><%= posts[i].score%></td>
+              <td><%= (posts[i].viewCount) ? posts[i].viewCount : '' %></td>
+              <td><%= (posts[i].tags) ? posts[i].tags : '' %></td>
+            </tr>
+          <% }%>
+        </tbody>
+      </table>
+      <a id="next">next</a>
+      <% if (offset > 50) {%>
+        <a id="prev">prev</a>
+      <% } %>
+    </div>
+
+    <% include ../common/foot %>
+  </body>
+  <script>
+  $(document).ready(function () {
+    $(document).on("click", ".step", function (e) {
+      e.preventDefault();
+      var r = confirm("Are you sure you want to Delete?");
+      if(r === true) {
+        window.location.href = $(this).attr('href');
+      }
+    })
+    $(document).on("click","#search",function(e){
+      e.preventDefault();
+      window.location.href = '/posts?tag='+$('#tag').val()+'&searchByTitle=' + $('#searchByTitle').val()
+    })
+    $(document).on("click","#next",function(e){
+      e.preventDefault();
+      window.location.href = '/posts?offset=<%= offset%>&tag='+$('#tag').val()+'&searchByTitle=' + $('#searchByTitle').val()
+    })
+    $(document).on("click","#prev",function(e){
+      e.preventDefault();
+      window.location.href = '/posts?offset=<%= offset - 100 %>&tag='+$('#tag').val()+'&searchByTitle=' + $('#searchByTitle').val()
+    })
+    $(document).on("change","#tag",function(e){
+      e.preventDefault();
+      window.location.href = '/posts?tag='+$('#tag').val()+'&searchByTitle=' + $('#searchByTitle').val()
+    })
+  })
+  </script>
+</html>
