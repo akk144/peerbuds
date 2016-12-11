@@ -12,6 +12,7 @@ module.exports = {
         .sort({tagName : 1})
         .exec(function(err, doc){
           tags = doc;
+          callback();
         });
       }
     ],function(err,result){
@@ -22,7 +23,7 @@ module.exports = {
       if(req.query.tag) {
         crit.tags = {$regex: new RegExp(req.query.tag,"gi")};
       }
-      var limit = 50;
+      var limit = 10;
       var offset = parseInt(req.query.offset) || 0;
       var searchTitle = req.query.searchByTitle || '';
       var tag = req.query.tag || '';
